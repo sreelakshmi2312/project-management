@@ -18,29 +18,48 @@ function handleStartAddProject(){
     };
   });
   }
+function handleSelectProject(id){
+  setProjectState((prevState)=>{
+    return {
+      ...prevState,
+      selectedProjectId:null,
+    };
+  });
+}
+function handleCancelAddProject(){
+  setProjectState((prevState)=>{
+    return{
+      ...prevState,
+      selectedProjectID:undefined,
+    };
+  });
+
+}
 function handleAddProject(projectData){
-  setProjectState(prevState=>{
+  setProjectState((prevState)=>{
+     const projectId=Math.random();
      const newProject={
       ...projectData,
-      id:Math.random()
+      id:projectId,
      };
      return{
       ...prevState,
+      selectedProjectID:undefined,
       projects:[...prevState.projects,newProject]
      };
   });
 }
-
+console.log(projectState);
 let content;
 if(projectState.selectedProjectID===null){
-  content=<NewProject/>
+  content=<NewProject onAdd={handleAddProject} onCancel={handleCancelAddProject}/>
 }else if(projectState.selectedProjectID===undefined){
-  content=<NoProject noProject={handleStartAddProject}/>
+  content=<NoProject noProject={handleStartAddProject} projects={projectState.projects}/>
   }
 return(
   <main className="h-screen my-8 flex gap-8">
     
-    <Sidebar addProject={handleStartAddProject}/>
+    <Sidebar addProject={handleStartAddProject} projects={projectState.projects} onSelectProject={handleSelectProject}/>
     {content}
     
     
