@@ -22,7 +22,7 @@ export default function Sidebar({ addProject, projects , onSelectProject ,select
           cssClasses+="text-stone-400"
         }
         return(<li key={project.id}>
-          <button className={cssClasses} onClick={onSelectProject}>
+          <button className={cssClasses} onClick={()=>onSelectProject(project.id)}>
             {project.title}
           </button>
         </li>);
