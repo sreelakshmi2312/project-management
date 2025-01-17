@@ -50,7 +50,7 @@ function App() {
   function handleDeleteProject() {
     const isConfirmed = window.confirm('Are you sure you want to delete this project?');
     if (isConfirmed) {
-      const selectedProjectIdToDelete = projectState.selectedProjectId; // Store the ID before setting it to undefined
+      const selectedProjectIdToDelete = projectState.selectedProjectId; 
       setProjectState((prevState) => ({
         ...prevState,
         selectedProjectId: undefined,
@@ -101,7 +101,7 @@ function App() {
   }
 
   return (
-    <main className="h-screen my-8 flex gap-8">
+    <main className="h-screen flex gap-10">
       <Sidebar addProject={handleStartAddProject} projects={projectState.projects} onSelectProject={handleSelectProject} selectedProjectId={projectState.selectedProjectId} />
       {content}
     </main>
